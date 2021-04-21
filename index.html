@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      
+    </style>
+</head>
+<body>
+ <!--label>
+    <input type="checkbox" name="enabled" checked>
+ </label>
+     <div id="printBlock"></div-->
+     <form id="myForm">
+     <label>Количество  </label><input type="range" name="quantity" min="1" max="10"><span id="rangeN"></span>
+     <div><img src="" alt=""></div>
+    
+     <label>Цена за ед  </label><p><input type="text" name="valueInput" placeholder="Введите значение" /></p>
+     <label>Доставка  </label><input type="checkbox" name="enabled" checked><br>
+     <label>Размер  </label><input type="radio" name="size" value="M" checked><span>M</span><input type="radio" name="size" value="L"><span>L</span>
+     </form>
+    
+    <div id="printBlock"></div>
+
+    
+<script>
+   
+  var myForm = document.querySelector("#myForm");
+  var printBlock = document.getElementById("printBlock");
+  var sumInput = document.querySelector('input[name="quantity"]');
+  var firstInput = document.querySelector('input[name="valueInput"]');
+  var enabled = document.querySelector('input[name="enabled"]');
+  var sizeBox = document.querySelectorAll('input[name="size"]');
+  var valueInputRange = document.getElementById('rangeN');
+    
+    
+  valueInputRange.textContent = sumInput.value;
+ 
+   myForm.addEventListener('change', formChange);
+    
+   firstInput.addEventListener('input', formChange);
+    
+   printBlock.textContent = "";    
+   
+    
+    
+    
+   function formChange() {     
+        
+   //input range
+    
+    
+    let sumValue = sumInput.value;
+    valueInputRange.textContent = sumValue;
+    console.log(sumInput);
+    console.log(sumValue);
+    
+       
+    
+    //input text
+    
+    if ((firstInput.value === "") || (isNaN(firstInput.value) === true)) {
+       firstInput.value = "";
+       }
+        
+    let a = Number(firstInput.value);
+    console.log(firstInput);
+    console.log(a);
+        
+       
+        
+    //enabled 
+       
+    var delIndex = 0;
+        
+    if (enabled.checked === true)  {delIndex = 35}
+    else {delIndex = 0};
+    console.log('delIndex', delIndex);    
+     
+       
+    
+    //sizeBox
+       
+    
+    var sizeIndex = 0;
+    if (sizeBox[0].checked) {sizeIndex = 1}
+    else  {sizeIndex = 1.5};
+    
+    printBlock.textContent = "Стоимость заказа составляет: " + (a * sumValue * sizeIndex + delIndex) + " грн";
+        
+   }
+    
+    
+</script>
+
+    
+</body>
+</html>
